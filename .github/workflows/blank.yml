@@ -36,6 +36,4 @@ jobs:
 
             - run: |
                 echo "separated: ${{ steps.split.outputs._1 }}"
-
-            - run: |
-                echo "separated: ${{ steps.split.outputs._2 }}"
+                

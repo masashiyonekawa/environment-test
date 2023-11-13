@@ -1,0 +1,24 @@
+name: Set environment
+on:
+  push:
+    branches:
+      - dev-*
+      - release-*
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  set-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "environment_name=${{ github.ref_name }}" >> $GITHUB_ENV
+
+  print-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo ${{ env.environment_name }}
+          

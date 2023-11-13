@@ -16,7 +16,7 @@ jobs:
             - id: set_outputs
               name: Set outputs
               run: |
-                echo "env_name=${{ github.ref }}" >> $GITHUB_OUTPUT
+                echo "env_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
 
     job2:
         runs-on: ubuntu-latest

@@ -15,10 +15,16 @@ jobs:
         outputs:
             env_name: ${{ steps.set_outputs.outputs.env_name }}
         steps:
+            - uses: winterjung/split@v2
+              id: split
+              with:
+                msg: ${{ github.ref_name }}
+                separator: /
+
             - id: set_outputs
               name: Set outputs
               run: |
-                echo "env_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+                echo "env_name=${{ steps.split.outputs._1 }}" >> $GITHUB_OUTPUT
 
     job2:
         runs-on: ubuntu-latest
@@ -27,13 +33,3 @@ jobs:
             - name: Use outputs
               run: |
                 echo "env_name: ${{ needs.job1.outputs.env_name }}"
-
-            - uses: winterjung/split@v2
-              id: split
-              with:
-                msg: ${{ needs.job1.outputs.env_name }}
-                separator: /
-
-            - run: |
-                echo "separated: ${{ steps.split.outputs._1 }}"
-                

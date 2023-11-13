@@ -12,13 +12,11 @@ jobs:
         runs-on: ubuntu-latest
         outputs:
             hoge: ${{ steps.set_outputs.outputs.hoge }}
-            fuga: ${{ steps.set_outputs.outputs.fuga }}
         steps:
             - id: set_outputs
               name: Set outputs
               run: |
-                echo "hoge=hoge" >> $GITHUB_OUTPUT
-                echo "fuga=fuga" >> $GITHUB_OUTPUT
+                echo "hoge=${{ github.ref }}" >> $GITHUB_OUTPUT
 
     job2:
         runs-on: ubuntu-latest
@@ -27,5 +25,4 @@ jobs:
             - name: Use outputs
               run: |
                 echo "hoge: ${{ needs.job1.outputs.hoge }}"
-                echo "fuga: ${{ needs.job1.outputs.fuga }}"
           

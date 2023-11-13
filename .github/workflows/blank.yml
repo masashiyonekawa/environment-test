@@ -33,3 +33,12 @@ jobs:
             - name: Use outputs
               run: |
                 echo "env_name: ${{ needs.job1.outputs.env_name }}"
+
+    job3:
+        runs-on: ubuntu-latest
+        needs: job1
+        environment: ${{ needs.job1.outputs.env_name }}
+        steps:
+            - name: Use environment
+              run: |
+                echo "TEST_VAR: ${{ vars.TEST_VAR }}"

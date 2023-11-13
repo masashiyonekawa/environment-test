@@ -11,7 +11,7 @@ jobs:
     job1:
         runs-on: ubuntu-latest
         outputs:
-            hoge: ${{ steps.set_outputs.outputs.env_name }}
+            env_name: ${{ steps.set_outputs.outputs.env_name }}
         steps:
             - id: set_outputs
               name: Set outputs

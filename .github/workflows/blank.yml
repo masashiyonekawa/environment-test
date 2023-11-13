@@ -1,7 +1,9 @@
 name: Set environment
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - dev/*
+      - release/*
   workflow_dispatch:
 
 permissions:
@@ -25,4 +27,15 @@ jobs:
             - name: Use outputs
               run: |
                 echo "env_name: ${{ needs.job1.outputs.env_name }}"
-          
+
+            - uses: winterjung/split@v2
+              id: split
+              with:
+                msg: ${{ needs.job1.outputs.env_name }}
+                separator: /
+
+            - run: |
+                echo "separated: ${{ steps.split.outputs._1 }}"
+
+            - run: |
+                echo "separated: ${{ steps.split.outputs._2 }}"

@@ -42,3 +42,16 @@ jobs:
             - name: Use environment
               run: |
                 echo "TEST_VAR: ${{ vars.TEST_VAR }}"
+
+    job4:
+        runs-on: ubuntu-latest
+        steps:
+          - name: az containerapp show
+            uses: azure/CLI@v1
+            with:
+              inlineScript: |
+                az containerapp show \
+                  --resource-group rg-yone-containerapps-cicd \
+                  --name ca-yone-containerapps-cicd \
+                  --query properties.configuration.ingress.fqdn
+  

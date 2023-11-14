@@ -2,8 +2,7 @@ name: Set environment
 on:
   push:
     branches:
-      - dev/*
-      - release/*
+      - main
   workflow_dispatch:
 
 permissions:
